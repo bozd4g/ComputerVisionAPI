@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ComputerVisionAPI.ViewModels;assembly=ComputerVisionAPI"
+             x:Class="ComputerVisionAPI.MainPage"
+             Title="ComputerVisionAPI"
+             BackgroundColor="#F5F5F5"
+             x:Name="MainContentPage">
+
+    <ContentPage.BindingContext>
+        <viewModels:MainPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ContentView Grid.Row="0">
+                <StackLayout Padding="15,10,0,0"
+                             Spacing="25">
+                    <Label Text="Select a choice"
+                           FontSize="35"
+                           TextColor="#757575" />
+                    <StackLayout Padding="25,0">
+                        <Button Text="Take a photo"
+                                Command="{Binding Path=BindingContext.TakeAPhotoCommand, 
+                                Source={x:Reference MainContentPage}}" />
+                        <Button Text="Select a photo"
+                                Command="{Binding Path=BindingContext.SelectAPhotoCommand, 
+                                Source={x:Reference MainContentPage}}" />
+                    </StackLayout>
+                    <Label Text="{Binding SelectedPhoto}"
+                           TextColor="#202020"
+                           FontSize="17" />
+                </StackLayout>
+            </ContentView>
+
+            <ContentView Grid.Row="1">
+                <StackLayout Padding="15,10,0,0"
+                             IsVisible="{Binding IsVisible}">
+                    <Label Text="Data"
+                           FontSize="35"
+                           TextColor="#757575" />
+                    <Label Text="{Binding MetaData}"
+                           FontSize="17"
+                           TextColor="#202020" />
+                    <Label Text="{Binding CaptionText}"
+                           FontSize="17"
+                           TextColor="#202020" />
+                    <Label Text="{Binding Tags}"
+                           FontSize="17"
+                           TextColor="#202020" />
+                </StackLayout>
+            </ContentView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
